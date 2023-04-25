@@ -1,0 +1,23 @@
+#!/bin/bash
+clear
+read -p "Enter Country " country
+read -p "Enter Capital of state " city
+exec timedatectl set-timezone $country / $city
+clear
+echo "Find your storage device and remember the name of it"
+lsblk
+read -p "Enter the storage device name" storage
+echo "You will now partition your storage device, if your computer is over 2 terrabytes and not a virtual machine, use gpt. If not, use dos. Remember to set the first partion to 512m and mark it as boot by pressing b and allocate the rest of your space to the other partion. Make sure both partitions are primary and that you wrote the changes to disk"
+read
+cfdisk /dev/$storage
+dev1="${storage}1"
+dev2="${storage}2"
+mkfs.ext4 /dev/$dev1
+mkfs.ext4 /dev/$dev2
+mkdir /mnt/boot
+mount /dev/$dev1 /mnt/boot
+mount /dev/$dev2 /mnt
+sudo pacman -Sy archlinux-keyring 
+pacstrap /mnt base base-devel linux linux-firmware vim nano
+genfstab -U /mnt >> /mnt/etc/fstab
+arch-chroot /mnt /bin/bash 

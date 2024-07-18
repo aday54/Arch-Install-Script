@@ -29,7 +29,7 @@ mount /dev/$dev1 /mnt/boot
 mount /dev/$dev2 /mnt
 
 clear
-#Installs the Operating System and Changes the root to the proper location
+#Installs the Operating System and enter the new system with chroot
 sudo pacman -Sy archlinux-keyring 
 pacstrap /mnt base base-devel linux linux-firmware vim nano
 genfstab -U /mnt >> /mnt/etc/fstab

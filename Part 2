@@ -1,3 +1,4 @@
+pacman -Syu
 pacman -S networkmanager grub
 systemctl enable Networkmanager
 read -p "Enter the storage device name" storage

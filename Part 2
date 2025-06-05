@@ -1,6 +1,6 @@
 pacman -Syu
 pacman -S networkmanager grub
-systemctl enable Networkmanager.service
+systemctl enable NetworkManager.service
 read -p "Enter the storage device name" storage
 grub-install /dev/$storage
 grub-mkconfig -o /boot/grub/grub.cfg
